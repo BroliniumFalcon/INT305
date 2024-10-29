@@ -1,0 +1,36 @@
+import UIKit
+
+class GameRulesViewController: UIViewController {
+    
+    let gameRules = [
+        ("Chess", "Custom rules for Chess"),
+        ("Monopoly", "Custom rules for Monopoly"),
+        ("Scrabble", "Custom rules for Scrabble")
+    ]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupUI()
+    }
+    
+    func setupUI() {
+        var yPosition = 100
+        for (game, rule) in gameRules {
+            let button = UIButton(type: .system)
+            button.setTitle(game, for: .normal)
+            button.frame = CGRect(x: 100, y: yPosition, width: 200, height: 40)
+            button.addTarget(self, action: #selector(showRuleDetail(_:)), for: .touchUpInside)
+            button.tag = yPosition // Assigning tag to identify the button
+            view.addSubview(button)
+            yPosition += 60
+        }
+    }
+    
+    @objc func showRuleDetail(_ sender: UIButton) {
+        let gameIndex = (sender.tag - 100) / 60
+        let ruleDetailVC = RuleDetailViewController()
+        ruleDetailVC.ruleDetail = gameRules[gameIndex].1
+        self.present(ruleDetailVC, animated: true, completion: nil)
+    }
+}
