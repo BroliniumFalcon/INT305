@@ -1,0 +1,42 @@
+import UIKit
+
+class TimerViewController: UIViewController {
+
+    var timer: Timer?
+    var progressBar: UIProgressView!
+    var totalTime: Float = 60.0
+    var timeLeft: Float = 60.0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupUI()
+    }
+    
+    func setupUI() {
+        // Progress Bar
+        progressBar = UIProgressView(progressViewStyle: .default)
+        progressBar.frame = CGRect(x: 50, y: 200, width: 300, height: 50)
+        progressBar.progress = timeLeft / totalTime
+        view.addSubview(progressBar)
+        
+        // Start Button
+        let startButton = UIButton(type: .system)
+        startButton.setTitle("Start Timer", for: .normal)
+        startButton.frame = CGRect(x: 100, y: 300, width: 200, height: 50)
+        startButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
+        view.addSubview(startButton)
+    }
+    
+    @objc func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if self.timeLeft > 0 {
+                self.timeLeft -= 1.0
+                self.progressBar.progress = self.timeLeft / self.totalTime
+            } else {
+                timer.invalidate()
+                print("Timer finished")
+            }
+        }
+    }
+}
