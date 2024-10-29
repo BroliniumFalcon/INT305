@@ -1,0 +1,36 @@
+import UIKit
+
+class MainViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Set up your main UI elements here
+        setupUI()
+    }
+    
+    func setupUI() {
+        // Set up Score Tracker Button
+        let scoreTrackerButton = UIButton(type: .system)
+        scoreTrackerButton.setTitle("Score Tracker", for: .normal)
+        scoreTrackerButton.addTarget(self, action: #selector(openScoreTracker), for: .touchUpInside)
+        scoreTrackerButton.frame = CGRect(x: 100, y: 100, width: 200, height: 50)
+        view.addSubview(scoreTrackerButton)
+
+        // Set up Game Rules Button
+        let gameRulesButton = UIButton(type: .system)
+        gameRulesButton.setTitle("Game Rules", for: .normal)
+        gameRulesButton.addTarget(self, action: #selector(openGameRules), for: .touchUpInside)
+        gameRulesButton.frame = CGRect(x: 100, y: 200, width: 200, height: 50)
+        view.addSubview(gameRulesButton)
+    }
+    
+    @objc func openScoreTracker() {
+        let scoreTrackerVC = ScoreTrackerViewController()
+        self.present(scoreTrackerVC, animated: true, completion: nil)
+    }
+    
+    @objc func openGameRules() {
+        let gameRulesVC = GameRulesViewController()
+        self.present(gameRulesVC, animated: true, completion: nil)
+    }
+}
