@@ -1,0 +1,19 @@
+import UIKit
+
+class RuleDetailViewController: UIViewController {
+    
+    var ruleDetail: String = ""
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupUI()
+    }
+    
+    func setupUI() {
+        let ruleLabel = UILabel(frame: CGRect(x: 20, y: 100, width: 300, height: 200))
+        ruleLabel.text = ruleDetail
+        ruleLabel.numberOfLines = 0
+        view.addSubview(ruleLabel)
+    }
+}
